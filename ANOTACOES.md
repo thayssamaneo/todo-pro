@@ -96,13 +96,13 @@ Foi adicionado observações para esclarecer como e onde cada comando deveria se
 |Consigo escrever um README de execução | | | x |
 |Consigo investigar um erro simples. | | | x |
 
-1. Qual foi o erro mais difícil da semana?
+1. Qual foi o erro mais difícil da semana? \
 Listar as tarefas na tela.
 
-2. Como você investigou esse erro?
+2. Como você investigou esse erro? \
 Procurei entender onde havia errado e corrigir testando soluções que funcionassem e pesquisando.
 
-3. Qual parte da entrega ainda pode melhorar?
+3. Qual parte da entrega ainda pode melhorar? \
 As tarefas permanecerem salvas mesmo quando você fecha o navegador e encaixar melhor no layout textos muito longos.
 
 4. O que você espera aprender na próxima semana? \
