@@ -1,88 +1,86 @@
 import { useState } from "react";
 
 function App() {
-  // Estado inicial com três tarefas de exemplo (atendendo ao Desafio Final)
-  const [tasks, setTasks] = useState([
-    { id: 1, title: "Alinhar escopo do projeto To-Do Pro", completed: true },
-    { id: 2, title: "Desenvolver protótipo da interface React", completed: false },
-    { id: 3, title: "Testar a aplicação e validar o build", completed: false },
+  // Estado inicial com três tarefas
+  const [tarefa, setTarefa] = useState([
+    { id: 1, titulo: "Ir ao mercado", completa: true },
+    { id: 2, titulo: "Comprar um lápis novo", completa: false },
+    { id: 3, titulo: "Assistir um filme no cinema", completa: false },
   ]);
 
   // Estado para controlar o campo de digitação de novas tarefas
-  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newTarefaTitulo, setNewTarefaTitulo] = useState("");
 
-  // Cálculo de Estado Derivado (sem criar estados desnecessários)
-  const completedCount = tasks.filter((task) => task.completed).length;
+  // Cálculo de Estado Derivado
+  const completaCount = tarefa.filter((tarefa) => tarefa.completa).length;
 
   // Função para alternar o status de concluído/pendente de uma tarefa de forma IMUTÁVEL
-  function toggleTaskStatus(taskId) {
-    setTasks((currentTasks) =>
-      currentTasks.map((task) =>
-        task.id === taskId ? { ...task, completed: !task.completed } : task
+  function toggleTarefaStatus(tarefaId) {
+    setTarefa((currentTarefa) =>
+      currentTarefa.map((tarefa) =>
+        tarefa.id === tarefaId ? { ...tarefa, completa: !tarefa.completa } : tarefa
       )
     );
   }
 
-  // Função para adicionar uma nova tarefa (Manipulação de array com Imutabilidade)
-  function handleAddTask(e) {
+  // Função para adicionar uma nova tarefa 
+  function handleAddTarefa(e) {
     e.preventDefault();
-    if (!newTaskTitle.trim()) return;
+    if (!newTarefaTitulo.trim()) return;
 
-    const newTask = {
+    const newTarefa = {
       id: Date.now(), // Gera um ID único
-      title: newTaskTitle,
-      completed: false,
+      titulo: newTarefaTitulo,
+      completa: false,
     };
 
-    setTasks((currentTasks) => [...currentTasks, newTask]);
-    setNewTaskTitle(""); // Limpa o campo
+    setTarefa((currentTarefa) => [...currentTarefa, newTarefa]);
+    setNewTarefaTitulo(""); // Limpa o campo
   }
 
   return (
     <main className="container">
       <header className="header">
         <h1>To-Do Pro</h1>
-        <p>Sistema corporativo para gestão de tarefas de alta eficiência.</p>
+        <p>Adicione novas tarefas e gerencie as atuais, Thayssa</p>
       </header>
 
-      <section className="task-section">
+      <section className="tarefa-section">
         <h2>Minhas Tarefas</h2>
+        <p>Aqui você poderá gerenciar suas tarefas sabendo quais ainda precisa realizar.</p>
         
-        {/* Formulário de cadastro de tarefas */}
-        <form onSubmit={handleAddTask} className="task-form">
+        <form onSubmit={handleAddTarefa} className="tarefa-form">
           <input
             type="text"
-            placeholder="Digite o título da nova tarefa..."
-            value={newTaskTitle}
-            onChange={(e) => setNewTaskTitle(e.target.value)}
+            placeholder="Digite o título da nova tarefa"
+            value={newTarefaTitulo}
+            onChange={(e) => setNewTarefaTitulo(e.target.value)}
           />
           <button type="submit">Nova tarefa</button>
         </form>
 
-        {/* Resumo/Métricas derivado do estado */}
-        <div className="task-summary">
-          <p>Total de tarefas: <strong>{tasks.length}</strong></p>
-          <p>Concluídas: <strong>{completedCount}</strong></p>
-          <p>Pendentes: <strong>{tasks.length - completedCount}</strong></p>
+        <div className="tarefa-summary">
+          <p>Total de tarefas: <strong>{tarefa.length}</strong></p>
+          <p>Concluídas: <strong>{completaCount}</strong></p>
+          <p>Pendentes: <strong>{tarefa.length - completaCount}</strong></p>
         </div>
 
-        {/* Lista de Tarefas com Chaves Estáveis (key={task.id}) */}
-        <ul className="task-list">
-          {tasks.map((task) => (
+        <ul className="tarefa-list">
+          {tarefa.map((tarefa) => (
             <li
-              key={task.id}
-              className={`task-item ${task.completed ? "completed" : "pending"}`}
+              key={tarefa.id}
+              className={`tarefa-item ${tarefa.completa ? "completa" : "pending"}`}
             >
-              <span className="task-title">{task.title}</span>
-              <div className="task-actions">
+              <span className="tarefa-titulo">{tarefa.titulo}</span>
+              <div className="tarefa-actions">
                 <span className="status-badge">
-                  {task.completed ? "Concluída" : "Pendente"}
+                  {tarefa.completa ? "Concluída" : "Pendente"}
                 </span>
                 <button
                   type="button"
-                  onClick={() => toggleTaskStatus(task.id)}
+                  onClick={() => toggleTarefaStatus(tarefa.id)}
                 >
-                  {task.completed ? "Reabrir" : "Concluir"}
+                  {tarefa.completa ? "Reabrir" : "Concluir"}
                 </button>
               </div>
             </li>
